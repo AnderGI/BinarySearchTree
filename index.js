@@ -61,6 +61,8 @@ class Tree {
   delete(value, node) {
     if(node === null) return node;
 
+    //change either reight or left branch and update those values
+    //into the original tree
     if(value > node.data) node.right = this.delete(value, node.right);
     else if(value < node.data) node.left = this.delete(value, node.left);
     else{
@@ -69,6 +71,20 @@ class Tree {
           node = null;
           return node;
         }
+
+      //CASE 2 : ONE CHILD
+      if(node.right === null && node.left !== null){
+        //copy the pointer of node left to its root node
+        //delete node left and return the root node
+        //with the upgraded values
+        node = node.left;
+        node.left = null;
+        return node;
+      }else if(node.left === null && node.right !== null){
+        node = node.right;
+        right.left = null;
+        return node;
+      }
     }
 
     return node;
@@ -101,7 +117,7 @@ function order(l, r) {
   return [...orderedArray, ...l, ...r];
 }
 
-let array = [3, 3, 12, 14, 1, 1, 5, 16, 7, 7];
+let array = [3, 3, 12, 14, 1, 1, 5, 16, 7, 7, 6];
 let t = new Tree(array);
 console.log(t.array);
 
@@ -116,5 +132,5 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 };
 
 prettyPrint(t.root);
-console.log(t.delete(1, t.root));
+t.delete(3,t.root);
 prettyPrint(t.root);
