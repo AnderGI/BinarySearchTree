@@ -82,9 +82,28 @@ class Tree {
         return node;
       }else if(node.left === null && node.right !== null){
         node = node.right;
-        right.left = null;
+        node.left = null;
         return node;
       }
+
+      //CASE 3: TWO CHILDREN
+      if(node.right !== null && node.left !== null){
+        let firstRight = node.right;
+        let pointer = node;
+        let minimumValue = false;
+        while(!minimumValue){
+          if(firstRight.left !== null){
+            pointer = firstRight;
+            firstRight = firstRight.left;
+          }else{
+            node.data = firstRight.data;
+            pointer.left = null;
+            minimumValue = true;
+          }
+        }
+      }
+
+
     }
 
     return node;
@@ -117,7 +136,7 @@ function order(l, r) {
   return [...orderedArray, ...l, ...r];
 }
 
-let array = [3, 3, 12, 14, 1, 1, 5, 16, 7, 7, 6];
+let array = [3,1,14,10,7,8,4,2,13,6,9,5,15,25,21,18,27,22,19,16,23,20,17];
 let t = new Tree(array);
 console.log(t.array);
 
@@ -131,6 +150,7 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
   }
 };
 
+
 prettyPrint(t.root);
-t.delete(3,t.root);
+t.delete(9, t.root)
 prettyPrint(t.root);
