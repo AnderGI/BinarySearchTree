@@ -92,6 +92,9 @@ class Tree {
         let pointer = node;
         let minimumValue = false;
         while(!minimumValue){
+          //go left until there is only null
+          //firstRight point at the most left node
+          //pointer point to ist parent node
           if(firstRight.left !== null){
             pointer = firstRight;
             firstRight = firstRight.left;
@@ -108,6 +111,15 @@ class Tree {
 
     return node;
   }
+
+  find(value, node){
+    if(node === null) return null;
+    if(value === node.data) return node.data;
+    else if(value > node.data) node = this.find(value, node.right);
+    else if (value < node.data) node = this.find(value, node.left);
+    return node;
+  }
+
 }
 
 function mergeSort(a) {
@@ -152,5 +164,4 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 
 
 prettyPrint(t.root);
-t.delete(9, t.root)
-prettyPrint(t.root);
+console.log(t.find(12, t.root));
