@@ -12,6 +12,7 @@ class Tree {
     this.root = this.buildTree();
     this.levelOrderArray = [];
     this.inorderArray = [];
+    this.preorderArray = []; 
   }
 
   buildTree(_array = this.array) {
@@ -157,6 +158,15 @@ class Tree {
     this.inorderArray.push(node.data);
     this.inorderTraversal(node.right);
   }
+
+  preorderTraversal(node) { //DLR
+    if ( node === null) return;
+    this.preorderArray.push(node.data);
+    this.preorderTraversal(node.left);
+    this.preorderTraversal(node.right);
+  }
+
+
 }
 
 function mergeSort(a) {
@@ -203,4 +213,6 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 prettyPrint(t.root);
 t.inorderTraversal(t.root);
 console.log(t.inorderArray)
+t.preorderTraversal(t.root)
+console.log(t.preorderArray)
 
