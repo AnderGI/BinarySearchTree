@@ -10,6 +10,7 @@ class Tree {
   constructor(_array) {
     this.array = mergeSort(_array);
     this.root = this.buildTree();
+    this.levelOrderArray = [];
   }
 
   buildTree(_array = this.array) {
@@ -113,11 +114,40 @@ class Tree {
   }
 
   find(value, node){
+    //if recursively found that node is null (doesn't exist)
+    //return null
+    //else evaluate the value to each node value
+    //get that value and start returning it recursively
     if(node === null) return null;
     if(value === node.data) return node.data;
     else if(value > node.data) node = this.find(value, node.right);
     else if (value < node.data) node = this.find(value, node.left);
     return node;
+  }
+
+  levelOrder(node){
+    let queu = [];
+    if(node === null) return null;
+    else{
+      queu.push(node);
+      while(queu.length !== 0){
+        let firtsInQueu = queu[0];
+        this.levelOrderArray.push(firtsInQueu.data);
+        if(firtsInQueu.left !== null){
+          let left = firtsInQueu.left;
+          queu.push(left);
+        }
+        if(firtsInQueu.right !== null){
+          let right = firtsInQueu.right;
+          queu.push(right);
+        }
+        queu.shift()
+      }
+
+      return this.levelOrderArray;
+
+    }
+
   }
 
 }
@@ -164,4 +194,4 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 
 
 prettyPrint(t.root);
-console.log(t.find(12, t.root));
+console.log(t.levelOrder(t.root));
