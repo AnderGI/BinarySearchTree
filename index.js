@@ -11,6 +11,7 @@ class Tree {
     this.array = mergeSort(_array);
     this.root = this.buildTree();
     this.levelOrderArray = [];
+    this.inorderArray = [];
   }
 
   buildTree(_array = this.array) {
@@ -150,6 +151,12 @@ class Tree {
 
   }
 
+  inorderTraversal(node){  //LDR
+    if ( node === null) return;
+    this.inorderTraversal(node.left);
+    this.inorderArray.push(node.data);
+    this.inorderTraversal(node.right);
+  }
 }
 
 function mergeSort(a) {
@@ -178,7 +185,7 @@ function order(l, r) {
   return [...orderedArray, ...l, ...r];
 }
 
-let array = [3,1,14,10,7,8,4,2,13,6,9,5,15,25,21,18,27,22,19,16,23,20,17];
+let array = ["F", "D", "B", "A", "C", "E", "J", "G", "K", "I", "H"];
 let t = new Tree(array);
 console.log(t.array);
 
@@ -194,4 +201,6 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 
 
 prettyPrint(t.root);
-console.log(t.levelOrder(t.root));
+t.inorderTraversal(t.root);
+console.log(t.inorderArray)
+
