@@ -120,7 +120,6 @@ class Tree {
     //else evaluate the value to each node value
     //get that value and start returning it recursively
     if (node === null) return null;
-    if (value === node.data) return node;
     else if (value > node.data) node = this.find(value, node.right);
     else if (value < node.data) node = this.find(value, node.left);
     return node;
@@ -235,11 +234,12 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 
 let array = [7, 9, 6, 5, 3, 45, 6, 1, 23, 45, 67, 6, 5, 8, 2, 12, 30];
 let t = new Tree(array);
+console.log(t.find(6, t.root));
+/*
 console.log("The tree : ")
 prettyPrint(t.root)
 console.log("Is balanced : " + t.isBalanced(t.root))
-t.levelOrder(t.root);
-console.log("In level order array : " + t.levelOrderArray);
+console.log("In level order array : " + t.levelOrder(t.root););
 t.preorderTraversal(t.root);
 console.log("In preorder array : " + t.preorderArray);
 t.postorderTraversal(t.root);
@@ -260,3 +260,4 @@ console.log("New tree : ");
 prettyPrint(t.root);
 
 console.log("Is balanced? " + t.isBalanced(t.root));
+*/
