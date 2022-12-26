@@ -185,6 +185,15 @@ class Tree {
       return 1 +  this.depth(node, root.right);
     }
   }
+
+  isBalanced(root){
+    let leftSubtree = root.left;
+    let rightSubtree = root.right;
+    let leftHeight = this.height(leftSubtree);
+    let rightHeight = this.height(rightSubtree);
+
+    return (Math.abs(leftHeight - rightHeight) <= 1);
+  }
 }
 
 function mergeSort(a) {
@@ -235,3 +244,4 @@ prettyPrint(t.root);
 let no = t.find(1, t.root);
 console.log(t.height(no))
 console.log(t.depth(no))
+console.log(t.isBalanced(t.root));
