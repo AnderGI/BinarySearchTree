@@ -32,18 +32,17 @@ class Tree {
   }
 
   insert(value, node) {
-    if(node.data === value){
+    if(node.data === value.data){
       //if value is the same do nothing
       return;
     }else{
       //compare values
-      if (value > node.data) {
+      if (value.data > node.data) {
         //if value is bigger see if right node is null => create one Node
         //and add it as its right child
         //if not continue looking on the right branch
         if (node.right === null) {
-          let n = new Node(value);
-          node.right = n;
+          node.right = value;
         } else {
           this.insert(value, node.right);
         }
@@ -52,8 +51,7 @@ class Tree {
         //and add it as its left child
         //if not continue looking on the left branch
         if (node.left === null) {
-          let n = new Node(value);
-          node.left = n;
+          node.left = value;
         } else {
           this.insert(value, node.left);
         }
@@ -122,7 +120,7 @@ class Tree {
     //else evaluate the value to each node value
     //get that value and start returning it recursively
     if(node === null) return null;
-    if(value === node.data) return node.data;
+    if(value === node.data) return node;
     else if(value > node.data) node = this.find(value, node.right);
     else if (value < node.data) node = this.find(value, node.left);
     return node;
@@ -173,6 +171,20 @@ class Tree {
     this.postorderTraversal(node.right);
     this.postorderArray.push(node.data);
   }
+
+  height(node) {
+    if(node === null) return -1;
+    return 1 + Math.max(this.height(node.left), this.height(node.right));
+  }
+
+  depth(node, root = t.root){    
+    if(node === root) return 0;
+    else if(node.data < root.data){
+      return 1 +  this.depth(node, root.left);
+    }else if(node.data > root.data){
+      return 1 +  this.depth(node, root.right);
+    }
+  }
 }
 
 function mergeSort(a) {
@@ -201,7 +213,7 @@ function order(l, r) {
   return [...orderedArray, ...l, ...r];
 }
 
-let array = ["F", "D", "B", "A", "C", "E", "J", "G", "K", "I", "H"];
+let array = [7,9,6,5,3,45,6,1,23];
 let t = new Tree(array);
 console.log(t.array);
 
@@ -216,7 +228,10 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 };
 
 
-prettyPrint(t.root);
-t.postorderTraversal(t.root)
-console.log(t.postorderArray)
 
+let n = new Node(10)
+t.insert(n, t.root)
+prettyPrint(t.root);
+let no = t.find(1, t.root);
+console.log(t.height(no))
+console.log(t.depth(no))
