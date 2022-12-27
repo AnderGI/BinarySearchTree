@@ -194,6 +194,12 @@ class Tree {
 
     return Math.abs(leftHeight - rightHeight) <= 1;
   }
+
+  rebalance(r){
+    let levelOrderArray = this.levelOrder(r);
+    t.root = this.buildTree(levelOrderArray);
+  }
+
 }
 
 function mergeSort(a) {
@@ -235,11 +241,11 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 let array = [7, 9, 6, 5, 3, 45, 6, 1, 23, 45, 67, 6, 5, 8, 2, 12, 30];
 let t = new Tree(array);
 console.log(t.find(6, t.root));
-/*
+
 console.log("The tree : ")
 prettyPrint(t.root)
 console.log("Is balanced : " + t.isBalanced(t.root))
-console.log("In level order array : " + t.levelOrder(t.root););
+console.log("In level order array : " + t.levelOrder(t.root));
 t.preorderTraversal(t.root);
 console.log("In preorder array : " + t.preorderArray);
 t.postorderTraversal(t.root);
@@ -260,4 +266,5 @@ console.log("New tree : ");
 prettyPrint(t.root);
 
 console.log("Is balanced? " + t.isBalanced(t.root));
-*/
+t.rebalance(t.root);
+prettyPrint(t.root);
