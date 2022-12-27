@@ -267,4 +267,13 @@ prettyPrint(t.root);
 
 console.log("Is balanced? " + t.isBalanced(t.root));
 t.rebalance(t.root);
+console.log("Rebalance");
 prettyPrint(t.root);
+console.log("Is balanced? " + t.isBalanced(t.root));
+console.log("In level order array : " + t.levelOrder(t.root));
+t.preorderTraversal(t.root);
+console.log("In preorder array : " + t.preorderArray);
+t.postorderTraversal(t.root);
+console.log("In postorder array : " + t.postorderArray);
+t.inorderTraversal(t.root);
+console.log("In inorder array : " + t.inorderArray);
